@@ -1,4 +1,4 @@
-﻿namespace Dominio.Etidade
+﻿namespace Dominio.Entidade
 {
     public class CategoriaProdutoDominio : EntidadeBase
     {
@@ -8,6 +8,10 @@
             => Nome = nome;
 
         public void AtualizarCategoria(string nome)
-            => Nome = nome;
+        {
+            Nome = nome;
+
+            SetDataAtualizacao();
+        }
     }
 }
