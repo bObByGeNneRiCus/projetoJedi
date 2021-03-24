@@ -8,8 +8,8 @@ namespace Aplicacao.Servico.Interface
     {
          Task<IEnumerable<UnidadeMedidaModel>> BuscarUnidadeMedida();
         Task<UnidadeMedidaModel> CriarUnidadeMedida(UnidadeMedidaEnvioModel unidade);
-        Task<UnidadeMedidaModel> AtualizarUnidadeMedida(int IDUnidadeMedida, UnidadeMedidaEnvioModel unidade);
-        Task<bool> RemoverUnidadeMedida(int IDUnidade);
+        Task<UnidadeMedidaModel> AtualizarUnidadeMedida(int idUnidadeMedida, UnidadeMedidaEnvioModel unidade);
+        Task<bool> RemoverUnidadeMedida(int idUnidade);
     }
 }
 

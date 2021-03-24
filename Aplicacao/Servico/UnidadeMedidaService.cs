@@ -18,12 +18,12 @@ namespace Aplicacao.Servico
             throw new NotImplementedException();
         }
 
-        public async Task<UnidadeMedidaModel> AtualizarUnidadeMedida(int IDUnidadeMedida, UnidadeMedidaModel unidade)
+        public async Task<UnidadeMedidaModel> AtualizarUnidadeMedida(int idUnidadeMedida, UnidadeMedidaEnvioModel unidade)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<bool> RemoverUnidadeMedida(int IDUnidade)
+        public async Task<bool> RemoverUnidadeMedida(int idUnidade)
         {
             throw new NotImplementedException();
         }

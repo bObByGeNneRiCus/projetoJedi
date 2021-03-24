@@ -27,7 +27,7 @@ namespace Api.Controllers
         }
 
         [HttpPost]
-        public async Task<UnidadeMedidaModel> Post(UnidadeMedidaEnvioModel unidade)
+        public async Task<UnidadeMedidaModel> Post([FromBody] UnidadeMedidaEnvioModel unidade)
         {
             var novaUnidade = await _unidadeMedidaService.CriarUnidadeMedida(unidade);
             return novaUnidade;
@@ -41,7 +41,7 @@ namespace Api.Controllers
         }
 
         [HttpDelete("{idUnidade}")]
-        public async Task<bool> Delete(int idUnidade)
+        public async Task<bool> Delete([FromRoute] int idUnidade)
         {
             var unidadeRemovida = await _unidadeMedidaService.RemoverUnidadeMedida(idUnidade);
             return unidadeRemovida;
