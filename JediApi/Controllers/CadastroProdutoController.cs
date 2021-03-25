@@ -26,9 +26,9 @@ private readonly ICadastroProdutoService _cadastroProdutoService;
             var cadastros = await _cadastroProdutoService.BuscarCadastros();
             return cadastros;
         }
-
+        
         [HttpPost]
-        public async Task<CadastroProdutoModel> Post(CadastroProdutoEnvioModel cadastro)
+        public async Task<CadastroProdutoModel> Post([FromBody] CadastroProdutoEnvioModel cadastro)
         {
             var novaCadastro = await _cadastroProdutoService.CriarCadastro(cadastro);
             return novaCadastro;
