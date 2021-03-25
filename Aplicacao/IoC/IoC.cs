@@ -9,6 +9,7 @@ namespace Aplicacao.IoC
         public static IServiceCollection ConfigurarDependencias(this IServiceCollection services)
         {
             services.AddTransient<ICategoriaProdutoService, CategoriaProdutoService>();
+            services.AddTransient<ICadastroProdutoService, CadastroProdutoService>();
 
             return services;
         }

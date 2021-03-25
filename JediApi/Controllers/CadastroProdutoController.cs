@@ -32,9 +32,9 @@ private readonly ICadastroProdutoService _cadastroProdutoService;
         {
             var novaCadastro = await _cadastroProdutoService.CriarCadastro(cadastro);
             return novaCadastro;
-        }
+        }   
 
-        [HttpPut("{idCadastro}")]
+         [HttpPut("{idCadastro}")]
         public async Task<CadastroProdutoModel> Put([FromRoute] int idCadastro, [FromBody] CadastroProdutoEnvioModel cadastro)
         {
             var cadastroAtualizada = await _cadastroProdutoService.AtualizarCadastro(idCadastro, cadastro);
