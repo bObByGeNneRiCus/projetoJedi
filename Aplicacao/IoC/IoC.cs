@@ -1,8 +1,9 @@
 ﻿using Aplicacao.Servico;
 using Aplicacao.Servico.Interface;
+using Infraestrutura.Mensagem;
+using Infraestrutura.Mensagem.Interface;
 using Infraestrutura.Repositorio;
 using Infraestrutura.Repositorio.Interface;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Aplicacao.IoC
@@ -15,7 +16,8 @@ namespace Aplicacao.IoC
             services.AddTransient<ICadastroProdutoService, CadastroProdutoService>();
             services.AddTransient<IUnidadeMedidaService, UnidadeMedidaService>();
             services.AddTransient<ICategoriaProdutoRepositorio, CategoriaProdutoRepositorio>();
-          
+            services.AddScoped<IMensagemRetorno, MensagemRetorno>();
+
             return services;
         }
     }

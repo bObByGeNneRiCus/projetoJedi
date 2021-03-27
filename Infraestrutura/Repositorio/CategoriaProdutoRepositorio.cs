@@ -1,20 +1,22 @@
 ﻿using Dapper;
 using Dominio.Entidade;
+using Infraestrutura.Mensagem.Interface;
 using Infraestrutura.Repositorio.Interface;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Infraestrutura.Repositorio
 {
     public class CategoriaProdutoRepositorio : RepositorioBase, ICategoriaProdutoRepositorio
     {
-        public CategoriaProdutoRepositorio(IConfiguration configuration) : base(configuration) { }
+        public CategoriaProdutoRepositorio(IConfiguration configuration, IMensagemRetorno mensagens) : base(configuration, mensagens) { }
 
         public async Task<CategoriaProdutoDominio> ObterCategoria(int id)
         {
-            CategoriaProdutoDominio categoria;
+            CategoriaProdutoDominio categoria = null;
             try
             {
                 _connection.Open();
@@ -27,7 +29,7 @@ namespace Infraestrutura.Repositorio
             }
             catch (Exception ex)
             {
-                throw new Exception($"Ocorreu um erro ao obter a categoria id {id}. Detalhes: {ex.Message}");
+                _mensagens.AdicionarErro($"Ocorreu um erro ao obter a categoria id {id}. Detalhes: {ex.Message}", HttpStatusCode.InternalServerError);
             }
             finally
             {
@@ -40,7 +42,7 @@ namespace Infraestrutura.Repositorio
         public async Task<IEnumerable<CategoriaProdutoDominio>> BuscarCategorias()
         {
             // Apenas cria uma lista para ser utilizada para retorno das categorias
-            IEnumerable<CategoriaProdutoDominio> categorias;
+            IEnumerable<CategoriaProdutoDominio> categorias = null;
             try
             {
                 // Abre a conexão com o banco de dados
@@ -52,7 +54,7 @@ namespace Infraestrutura.Repositorio
             }
             catch (Exception ex)
             {
-                throw new Exception($"Ocorreu um erro ao buscar as categorias. Detalhes: {ex.Message}");
+                _mensagens.AdicionarErro($"Ocorreu um erro ao buscar as categorias. Detalhes: {ex.Message}", HttpStatusCode.InternalServerError);
             }
             finally
             {
@@ -65,7 +67,7 @@ namespace Infraestrutura.Repositorio
 
         public async Task<CategoriaProdutoDominio> GravarGategoria(CategoriaProdutoDominio categoria)
         {
-            CategoriaProdutoDominio novaCategoria;
+            CategoriaProdutoDominio novaCategoria = null;
             try
             {
                 _connection.Open();
@@ -76,7 +78,7 @@ namespace Infraestrutura.Repositorio
             }
             catch (Exception ex)
             {
-                throw new Exception($"Ocorreu um erro ao gravar a categoria de produto {categoria.Nome}. Detalhes: {ex.Message}");
+                _mensagens.AdicionarErro($"Ocorreu um erro ao gravar a categoria de produto {categoria.Nome}. Detalhes: {ex.Message}", HttpStatusCode.InternalServerError);
             }
             finally
             {
@@ -103,11 +105,11 @@ namespace Infraestrutura.Repositorio
                 registrosAtualizados = await _connection.ExecuteAsync(query, parametros);
 
                 if (registrosAtualizados == 0)
-                    throw new Exception($"Nenhum registro pôde ser atualizado.");
+                    _mensagens.AdicionarErro($"Nenhum registro pôde ser atualizado.", HttpStatusCode.NoContent);
             }
             catch (Exception ex)
             {
-                throw new Exception($"Ocorreu um erro ao atualizar a categoria id {id}. Detalhes: {ex.Message}");
+                _mensagens.AdicionarErro($"Ocorreu um erro ao atualizar a categoria id {id}. Detalhes: {ex.Message}", HttpStatusCode.InternalServerError);
             }
             finally
             {
@@ -131,11 +133,11 @@ namespace Infraestrutura.Repositorio
                 registrosDeletados = await _connection.ExecuteAsync(query, parametro);
 
                 if (registrosDeletados == 0)
-                    throw new Exception($"Nenhum registro pôde ser deletado.");
+                    _mensagens.AdicionarErro($"Nenhum registro pôde ser deletado.", HttpStatusCode.NoContent);
             }
             catch (Exception ex)
             {
-                throw new Exception($"Ocorreu um erro ao deletar a categoria id {id}. Detalhes: {ex.Message}");
+                _mensagens.AdicionarErro($"Ocorreu um erro ao deletar a categoria id {id}. Detalhes: {ex.Message}", HttpStatusCode.InternalServerError);
             }
             finally
             {

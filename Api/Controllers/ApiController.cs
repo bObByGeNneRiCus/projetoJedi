@@ -4,7 +4,7 @@ namespace Api.Controllers
 {
     [Controller]
     [Route("api")]
-    public class ApiController : ApiControllerBase
+    public class ApiController : ControllerBase
     {
         [HttpGet]
         public string Get()

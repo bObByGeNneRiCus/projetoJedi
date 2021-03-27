@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Infraestrutura.Mensagem.Interface;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Data.SqlClient;
 
@@ -7,11 +8,13 @@ namespace Infraestrutura.Repositorio
     public abstract class RepositorioBase : IDisposable
     {
         protected readonly IConfiguration _configuration;
+        protected readonly IMensagemRetorno _mensagens;
         protected readonly SqlConnection _connection;
 
-        public RepositorioBase(IConfiguration configuration)
+        public RepositorioBase(IConfiguration configuration, IMensagemRetorno mensagens)
         {
             _configuration = configuration;
+            _mensagens = mensagens;
             _connection = getConnection();
         }
 

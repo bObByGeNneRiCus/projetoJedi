@@ -1,19 +1,20 @@
 ﻿using Aplicacao.Modelo.CategoriaProduto;
 using Aplicacao.Servico.Interface;
 using Dominio.Entidade;
+using Infraestrutura.Mensagem.Interface;
 using Infraestrutura.Repositorio.Interface;
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Aplicacao.Servico
 {
-    public class CategoriaProdutoService : ICategoriaProdutoService
+    public class CategoriaProdutoService : ServicoBase, ICategoriaProdutoService
     {
         private readonly ICategoriaProdutoRepositorio _categoriaProdutoRepositorio;
 
-        public CategoriaProdutoService(ICategoriaProdutoRepositorio categoriaProdutoRepositorio)
+        public CategoriaProdutoService(IMensagemRetorno mensagens, ICategoriaProdutoRepositorio categoriaProdutoRepositorio) : base(mensagens)
             => _categoriaProdutoRepositorio = categoriaProdutoRepositorio;
 
         public async Task<IEnumerable<CategoriaProdutoModel>> BuscarCategorias()
@@ -27,6 +28,7 @@ namespace Aplicacao.Servico
         {
             var categoriaProduto = new CategoriaProdutoDominio(categoria.Nome);
             var novaCategoria = await _categoriaProdutoRepositorio.GravarGategoria(categoriaProduto);
+            _mensagens.SetHttpStatus(HttpStatusCode.Created);
 
             return new CategoriaProdutoModel(novaCategoria);
         }
@@ -37,7 +39,10 @@ namespace Aplicacao.Servico
             var categoria = await _categoriaProdutoRepositorio.ObterCategoria(idCategoria);
 
             if (categoria == null)
-                throw new Exception($"Nenhum registro localizado com id {idCategoria}.");
+            {
+                _mensagens.AdicionarAlerta($"Nenhum registro localizado com id {idCategoria}.", HttpStatusCode.NotFound);
+                return null;
+            }
 
             categoria.AtualizarCategoria(categoriaAtualizacao.Nome);
 
@@ -51,7 +56,10 @@ namespace Aplicacao.Servico
             var categoria = await _categoriaProdutoRepositorio.ObterCategoria(idCategoria);
 
             if (categoria == null)
-                throw new Exception($"Nenhum registro localizado com id {idCategoria}.");
+            {
+                _mensagens.AdicionarAlerta($"Nenhum registro localizado com id {idCategoria}.", HttpStatusCode.NotFound);
+                return false;
+            }
 
             return await _categoriaProdutoRepositorio.DeletarGategoria(idCategoria);
         }

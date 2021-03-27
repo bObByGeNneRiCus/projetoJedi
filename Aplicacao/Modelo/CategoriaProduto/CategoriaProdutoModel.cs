@@ -9,6 +9,9 @@ namespace Aplicacao.Modelo.CategoriaProduto
 
         public CategoriaProdutoModel(CategoriaProdutoDominio dominio)
         {
+            if (dominio == null)
+                dominio = new CategoriaProdutoDominio();
+
             Id = dominio.Id;
             Nome = dominio.Nome;
         }
