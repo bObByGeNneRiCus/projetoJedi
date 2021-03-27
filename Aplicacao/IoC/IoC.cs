@@ -12,6 +12,7 @@ namespace Aplicacao.IoC
         public static IServiceCollection ConfigurarDependencias(this IServiceCollection services)
         {
             services.AddTransient<ICategoriaProdutoService, CategoriaProdutoService>();
+            services.AddTransient<ICadastroProdutoService, CadastroProdutoService>();
             services.AddTransient<IUnidadeMedidaService, UnidadeMedidaService>();
             services.AddTransient<ICategoriaProdutoRepositorio, CategoriaProdutoRepositorio>();
           
