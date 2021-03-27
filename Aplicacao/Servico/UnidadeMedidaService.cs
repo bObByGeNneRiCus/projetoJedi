@@ -8,7 +8,7 @@ namespace Aplicacao.Servico
 {
     public class UnidadeMedidaService : IUnidadeMedidaService
     {
-         public async Task<IEnumerable<UnidadeMedidaModel>> BuscarUnidadeMedida()
+        public async Task<IEnumerable<UnidadeMedidaModel>> BuscarUnidadeMedida()
         {
             throw new NotImplementedException();
         }
@@ -17,16 +17,15 @@ namespace Aplicacao.Servico
         {
             throw new NotImplementedException();
         }
-
-        public async Task<UnidadeMedidaModel> AtualizarUnidadeMedida(int IDUnidadeMedida, UnidadeMedidaEnvioModel unidade)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<bool> RemoverUnidadeMedida(int IDUnidade)
+        
+        public async Task<UnidadeMedidaModel> AtualizarUnidadeMedida(int idUnidadeMedida, UnidadeMedidaEnvioModel unidade)
         {
             throw new NotImplementedException();
         }
         
+        public async Task<bool> RemoverUnidadeMedida(int idUnidade)
+        {
+            throw new NotImplementedException();
+        }        
     }
 }
