@@ -1,3 +1,5 @@
+using Dominio.Entidade;
+
 namespace Dominio.Etidade
 {
     public class UnidadeMedidaDominio: EntidadeBase
