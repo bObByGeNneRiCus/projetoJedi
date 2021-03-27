@@ -1,4 +1,4 @@
-﻿using Dominio.Etidade;
+﻿using Dominio.Entidade;
 
 namespace Aplicacao.Modelo.CategoriaProduto
 {
