@@ -27,7 +27,7 @@ namespace Api.Controllers
         }
 
         [HttpPost]
-        public async Task<CategoriaProdutoModel> Post(CategoriaProdutoEnvioModel categoria)
+        public async Task<CategoriaProdutoModel> Post([FromBody] CategoriaProdutoEnvioModel categoria)
         {
             var novaCategoria = await _categoriaProdutoService.CriarCategoria(categoria);
             return novaCategoria;

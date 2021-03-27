@@ -4,6 +4,8 @@
     {
         public string Nome { get; private set; }
 
+        public CategoriaProdutoDominio() { }
+
         public CategoriaProdutoDominio(string nome)
             => Nome = nome;
 
