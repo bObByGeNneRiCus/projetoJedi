@@ -10,7 +10,7 @@ namespace Api.Controllers
     [Controller]
     [Route("categorias-produto")]
     [AllowAnonymous]
-    public class CategoriaProdutoController : ControllerBase
+    public class CategoriaProdutoController : ApiControllerBase
     {
         private readonly ICategoriaProdutoService _categoriaProdutoService;
 

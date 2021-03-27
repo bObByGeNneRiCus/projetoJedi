@@ -4,10 +4,10 @@ namespace Api.Controllers
 {
     [Controller]
     [Route("api")]
-    public class ApiController
+    public class ApiController : ApiControllerBase
     {
         [HttpGet]
         public string Get()
-            => "{ Api: Ok, Mensagen: Que a força esteja com você! }";
+            => "{ Api: Ok; Mensagem: Que a força esteja com você! }";
     }
 }

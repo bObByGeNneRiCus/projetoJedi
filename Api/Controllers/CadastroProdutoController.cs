@@ -12,8 +12,8 @@ namespace Api.Controllers
     [AllowAnonymous]
     public class CadastroProdutoController : ControllerBase
     {
-        
-private readonly ICadastroProdutoService _cadastroProdutoService;
+
+        private readonly ICadastroProdutoService _cadastroProdutoService;
 
         public CadastroProdutoController(ICadastroProdutoService cadastroProdutoService)
         {
@@ -26,15 +26,15 @@ private readonly ICadastroProdutoService _cadastroProdutoService;
             var cadastros = await _cadastroProdutoService.BuscarCadastros();
             return cadastros;
         }
-        
+
         [HttpPost]
         public async Task<CadastroProdutoModel> Post([FromBody] CadastroProdutoEnvioModel cadastro)
         {
             var novaCadastro = await _cadastroProdutoService.CriarCadastro(cadastro);
             return novaCadastro;
-        }   
+        }
 
-         [HttpPut("{idCadastro}")]
+        [HttpPut("{idCadastro}")]
         public async Task<CadastroProdutoModel> Put([FromRoute] int idCadastro, [FromBody] CadastroProdutoEnvioModel cadastro)
         {
             var cadastroAtualizada = await _cadastroProdutoService.AtualizarCadastro(idCadastro, cadastro);
