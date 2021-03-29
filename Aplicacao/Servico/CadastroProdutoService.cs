@@ -24,7 +24,6 @@ namespace Aplicacao.Servico
 
             return cadastros.Select(cadastro => new CadastroProdutoModel(cadastro));
         }
-        
         public async Task<CadastroProdutoModel> CriarCadastro(CadastroProdutoEnvioModel cadastro)
         {
             var cadastroProduto = new CadastroProdutoDominio(cadastro.Nome);
